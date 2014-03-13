@@ -1,0 +1,15 @@
+{
+  "name": "elasticsearch-bulk-loader",
+  "version": "0.0.1",
+  "description": "Bulk Loader for Elasticsearch",
+  "main": "index.js",
+  "author": "Johny Lam",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "elasticsearch": "~1.5.8",
+    "async": "~0.2.10",
+    "deferred": "~0.6.8",
+    "lodash": "~2.4.1",
+    "optimist": "~0.6.1"
+  }
+}

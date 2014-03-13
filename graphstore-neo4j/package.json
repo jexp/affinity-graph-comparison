@@ -1,0 +1,16 @@
+{
+  "name": "graphstore-neo4j",
+  "version": "0.0.1",
+  "description": "test performance of neo4j for product affinity",
+  "main": "src/index.js",
+  "dependencies": {
+    "neo4j": "~1.1.0",
+    "async": "~0.2.10",
+    "deferred": "~0.6.8",
+    "lodash": "~2.4.1"
+  },
+  "scripts": {
+    "test": "jasmine-node specs"
+  },
+  "author": "Johny Lam"
+}

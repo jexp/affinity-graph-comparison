@@ -1,0 +1,16 @@
+{
+  "name": "graphstore-memory",
+  "version": "0.0.2",
+  "description": "A graph store persisted in memory.",
+  "main": "src/index.js",
+  "dependencies": {
+    "async": "~0.2.10",
+    "deferred": "~0.6.8",
+    "underscore": "~1.5.2"
+  },
+  "scripts": {
+    "test": "jasmine-node specs"
+  },
+  "author": "Jack Herrington",
+  "license": "BSD-2-Clause"
+}
