@@ -1,17 +1,17 @@
-var gs_es = require('graphstore-elasticsearch');
-var gs_mem = require('graphstore-memory');
-var gs_mysql = require('graphstore-mysql');
-var gs_mongo = require('graphstore-mongo');
+// var gs_es = require('graphstore-elasticsearch');
+// var gs_mem = require('graphstore-memory');
+// var gs_mysql = require('graphstore-mysql');
+// var gs_mongo = require('graphstore-mongo');
 var gs_neo = require('graphstore-neo4j');
 var argv = require('optimist').demand(['name']).argv;
 var tester = require('./tester.js');
 var async = require('async');
 
 async.eachSeries( [
-	new gs_es(),
-	new gs_mem(),
-	new gs_mysql(),
-	new gs_mongo(),
+	// new gs_es(),
+	// new gs_mem(),
+	// new gs_mysql(),
+	// new gs_mongo(),
 	new gs_neo()
 ], function( item, cb1 ) {
 	async.eachSeries( item.configurations(), function( item, cb2 ) {

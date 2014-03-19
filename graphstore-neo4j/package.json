@@ -6,6 +6,7 @@
   "dependencies": {
     "neo4j": "~1.1.0",
     "async": "~0.2.10",
+    "request": "2.34.0",
     "deferred": "~0.6.8",
     "lodash": "~2.4.1"
   },

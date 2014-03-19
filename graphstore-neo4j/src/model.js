@@ -17,12 +17,12 @@ Model.prototype.create = function (obj) {
         obj.id = this.nextId++;
 
     var label = this.label,
-        stmt = 'CREATE (n:' + label + ' { obj } ) RETURN n;';
+        stmt = 'CREATE (n:' + label + ' { obj } ) RETURN n.id as id;';
 
-    this.client.query(stmt, {obj: obj}, function (e, result) {
+    this.client.cypher(stmt, {obj: obj}, function (e, result) {
         if (e) 
             d.reject(new Error('Unable to create ' + label + ' due to: ' + JSON.stringify(e)));
-        d.resolve(result[0].n.data.id);
+        d.resolve(result[0].id);
     });
 
     return d.promise;
@@ -34,7 +34,7 @@ Model.prototype.getByQuery = function (query) {
     var label = this.label,
         statement = 'MATCH (n:' + label + ') WHERE ' + this._createWhereClause(query) + ' RETURN n;';
 
-    this.client.query(statement, query, function (e, result) {
+    this.client.cypher(statement, query, function (e, result) {
         if (e) 
             d.reject(new Error('Unable to ' + label + ' get by query due to: ' + JSON.stringify(e)));
         d.resolve(result);

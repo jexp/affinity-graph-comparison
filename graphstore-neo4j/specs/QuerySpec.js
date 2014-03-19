@@ -50,6 +50,22 @@ describe("neo4j storage", function() {
         });
     });
 
+    it("should create an affinity as list", function(done) {
+        m.startLoading().then(function(){
+            m.addProduct({foo:'bar'}).then(function( product_id ){
+                expect(product_id).not.toBe(null);
+                m.addUser({foo:'bar'}).then(function( user_id ){
+                    expect(user_id).not.toBe(null);
+                    m.addAffinities([{user_id:user_id,product_id:product_id,relation:'like'}]).then(function( ids ){
+                        expect(ids.length).toBe(1);
+                        expect(ids[0]).not.toBe(null);
+                        done();
+                    });
+                });
+            });
+        });
+    });
+
     it("should allow for the start of the test", function(done) {
         m.startLoading().then(function(){
             m.addProduct({foo:'bar'}).then(function( product_id ){
