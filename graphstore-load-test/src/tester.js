@@ -19,11 +19,11 @@ function pick_from( values, index ) {
 
 function loadUsers( callback ) {
     _progress("Loading users");
+	var users=[]
     byline(fs.createReadStream('data/'+options.data_set+'/users.json', { encoding: 'utf8' })).on('data', function(line) {
         var user = JSON.parse( line );
-        _users_by_id[ user.id ] = user;
+        users.push(user);
     }).on('finish',function() {
-        var users =  _.values( _users_by_id );
         console.log(users.length);
         var groups=[];
         while (users.length) { groups.push(users.splice(0,10000)); }
@@ -40,11 +40,11 @@ function loadUsers( callback ) {
 
 function loadProducts( callback ) {
     _progress("Loading products");
+	var products=[];
     byline(fs.createReadStream('data/'+options.data_set+'/products.json', { encoding: 'utf8' })).on('data', function(line) {
         var product = JSON.parse( line );
-        _products_by_id[ product.id ] = product;
+        products.push(product);
     }).on('finish',function() {
-        var products =  _.values( _products_by_id );
         console.log(products.length);
         var groups=[];
         while (products.length) { groups.push(products.splice(0,10000)); }
@@ -61,14 +61,14 @@ function loadProducts( callback ) {
 
 function loadAffinities( callback ) {
     _progress("Loading affinities");
+	var affinities=[]
     byline(fs.createReadStream('data/'+options.data_set+'/affinities.json', { encoding: 'utf8' })).on('data', function(line) {
-        _affinities_all.push( JSON.parse( line ) );
+        affinities.push( JSON.parse( line ) );
     }).on('finish',function() {
-        console.log(_affinities_all.length);
+        console.log(affinities.length);
         var loaded = 0;
-        var affinities = [].concat(_affinities_all);
         var groups=[];
-        while (affinities.length) { groups.push(affinities.splice(0,10000)); }
+        while (affinities.length) { groups.push(affinities.splice(0,1000)); }
         async.eachLimit( groups, 8 ,function( group, scb ) {
             var mapped_affinities=group.map(function(affinity) { return { user_id: affinity.user_id , product_id: affinity.product_id , relation: affinity.relation}; } )
             m.addAffinities( mapped_affinities ).then( function() {
